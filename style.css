@@ -2,3 +2,19 @@ body {
     background-color: darkslategrey;
 }
 
+#grid-container {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+}
+
+#albums {
+    grid-column: 1;
+}
+
+#artists {
+    grid-column: 2;
+}
+
+#tracks {
+    grid-column: 3;
+}

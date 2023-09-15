@@ -1,0 +1,78 @@
+[
+  {
+    "title": "Back in Black",
+    "tracks": [
+      "Hells Bells",
+      "Shoot to Thrill",
+      "Back in Black",
+      "You Shook Me All Night Long",
+      "Rock and Roll Ain't Noise Pollution"
+    ],
+    "artist": "AC/DC",
+    "release_year": 1980,
+    "label": "Atlantic Records"
+  },
+  {
+    "title": "Hotel California",
+    "tracks": ["Hotel California", "New Kid in Town", "Life in the Fast Lane", "Wasted Time", "Victim of Love"],
+    "artist": "Eagles",
+    "release_year": 1976,
+    "label": "Asylum Records"
+  },
+  {
+    "title": "Led Zeppelin IV",
+    "tracks": ["Stairway to Heaven", "Black Dog", "Rock and Roll", "Misty Mountain Hop", "Going to California"],
+    "artist": "Led Zeppelin",
+    "release_year": 1971,
+    "label": "Atlantic Records"
+  },
+  {
+    "title": "The Wall",
+    "tracks": ["Another Brick in the Wall", "Comfortably Numb", "Hey You", "Mother", "Run Like Hell"],
+    "artist": "Pink Floyd",
+    "release_year": 1979,
+    "label": "Harvest Records"
+  },
+  {
+    "title": "Rumours",
+    "tracks": ["Go Your Own Way", "Dreams", "The Chain", "Don't Stop", "Gold Dust Woman"],
+    "artist": "Fleetwood Mac",
+    "release_year": 1977,
+    "label": "Warner Bros. Records"
+  },
+  {
+    "title": "Born to Run",
+    "tracks": ["Born to Run", "Thunder Road", "Jungleland", "She's the One", "Tenth Avenue Freeze-Out"],
+    "artist": "Bruce Springsteen",
+    "release_year": 1975,
+    "label": "Columbia Records"
+  },
+  {
+    "title": "Who's Next",
+    "tracks": ["Baba O'Riley", "Behind Blue Eyes", "My Wife", "Going Mobile", "Behind Blue Eyes"],
+    "artist": "The Who",
+    "release_year": 1971,
+    "label": "Track Records"
+  },
+  {
+    "title": "Dark Side of the Moon",
+    "tracks": ["Time", "Money", "Us and Them", "Breathe", "Brain Damage"],
+    "artist": "Pink Floyd",
+    "release_year": 1973,
+    "label": "Harvest Records"
+  },
+  {
+    "title": "Led Zeppelin II",
+    "tracks": ["Whole Lotta Love", "Heartbreaker", "Ramble On", "What Is and What Should Never Be", "Thank You"],
+    "artist": "Led Zeppelin",
+    "release_year": 1969,
+    "label": "Atlantic Records"
+  },
+  {
+    "title": "The Doors",
+    "tracks": ["Break On Through", "Light My Fire", "The End", "Soul Kitchen", "Twentieth Century Fox"],
+    "artist": "The Doors",
+    "release_year": 1967,
+    "label": "Elektra Records"
+  }
+]

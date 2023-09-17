@@ -1,3 +1,86 @@
+/* ===== ##### ROOT VARIABLER ##### ===== */
+:root {
+    --backgound-color: darkslategrey;
+    --header-footer-color: #333;
+}
+
+/* ===== ##### BODY ##### ===== */
 body {
-    background-color: darkslategrey;
+    background-color: var(--backgound-color);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Mindstehøjde for at fylde hele vinduet */
+}
+
+/* ===== ##### CONTAINER ##### ===== */
+.container {
+    flex-grow: 1; /* Gør containeren til flex-elementet, der vokser og fylder ledig plads */
+    display: grid;
+    grid-template-rows: auto 1fr auto; /* Del containeren i tre rækker */
+}
+
+/* ===== ##### HEADER ##### ===== */
+.header {
+    grid-row: 1;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 2fr 1fr;
+    background-color: var(--header-footer-color);
+    color: #fff;
+    padding: 10px;
+}
+
+.header-column {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchfield {
+    /* width: 100%; */
+    padding: 5px;
+    background-color: var(--header-footer-color);
+    color: #fff;
+}
+
+/* ===== ##### MAIN ##### ===== */
+.main {
+    grid-row: 2;
+}
+#grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+#albums {
+    grid-column: 1;
+}
+
+#artists {
+    grid-column: 2;
+}
+
+#tracks {
+    grid-column: 3;
+}
+
+/* ===== ##### FOOTER ##### ===== */
+
+.footer {
+    grid-row: 3;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 1fr 1fr; /* Opdel footer i fem kolonner */
+    background-color: var(--header-footer-color); /* Tilpas baggrundsfarven efter dine præferencer */
+    color: #fff; /* Tilpas tekstfarven efter dine præferencer */
+    width: 100%; /* Fyld hele bredden af skærmen */
+}
+
+.footer-column {
+    padding: 10px; /* Tilpas padding efter dine præferencer */
+}
+
+.footer-title {
+    text-align: center; /* Centrer overskriften i midterste kolonne */
 }

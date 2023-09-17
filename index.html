@@ -1,16 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="#" type="image/x-icon" />
-    <link rel="stylesheet" href="style.css" />
-    <title>MusicBase</title>
-  </head>
-  <body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="shortcut icon" href="#" type="image/x-icon" />
+        <link rel="stylesheet" href="style.css" />
+        <title>MusicBase</title>
+    </head>
+    <body>
+        <div class="container">
+            <header class="header">
+                <div class="header-column"></div>
+                <div class="header-column header-title">
+                    <h1>MusicBase</h1>
+                </div>
+                <div class="header-column"></div>
+                <div class="header-column">
+                    <!-- <label for="searchfield">Search </label> -->
+                    <input type="text" name="search" id="searchfield" placeholder="Søg..." />
+                </div>
+                <div class="header-column"></div>
+            </header>
 
-    
+            <main class="main">
+                <div id="grid-container">
+                    <p id="albums"></p>
+                    <p id="artists"></p>
+                    <p id="tracks"></p>
+                </div>
+            </main>
+        </div>
 
-    <script src="app.js"></script>
-  </body>
+        <footer class="footer">
+            <div class="footer-column"></div>
+            <div class="footer-column footer-title">
+                <h2>Made by: Me 🙋‍♂️</h2>
+            </div>
+            <div class="footer-column"></div>
+            <div class="footer-column"></div>
+            <div class="footer-column"></div>
+        </footer>
+
+        <script src="app.js"></script>
+    </body>
 </html>

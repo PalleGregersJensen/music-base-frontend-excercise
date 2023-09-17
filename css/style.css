@@ -110,6 +110,7 @@ table th {
     background-color: var(--header-footer-color); /* Tilpas baggrundsfarven efter dine præferencer */
     color: #fff; /* Tilpas tekstfarven efter dine præferencer */
     width: 100%; /* Fyld hele bredden af skærmen */
+    margin-top: 20px;
 }
 
 .footer-title {

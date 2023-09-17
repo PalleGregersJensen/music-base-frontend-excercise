@@ -34,7 +34,7 @@ async function initApp() {
 
 // get Json-data
 async function getJasonData() {
-    const response = await fetch("albums.json");
+    const response = await fetch("../data/albums.json");
     console.log(response);
     const data = await response.json();
     console.log(data);

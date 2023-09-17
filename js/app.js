@@ -25,20 +25,19 @@ async function initApp() {
 function showAlbums(filteredAlbums) {
     document.querySelector("#albums").insertAdjacentHTML(
         "beforeend",
-        `
+        /*html*/ `
             <h1>Albums</h1>
-  <table id="albums-table">
-    <thead>
-      <tr>
-        <th>Cover</th>
-        <th>Title</th>
-        <th>Releasedate</th>
-        <th>Tracks</th>
-      </tr>
-    </thead>
-    <tbody id="albums-table-body"></tbody>
-  </table>
-  `
+            <table id="albums-table">
+              <thead>
+                <tr>
+                  <th>Cover</th>
+                  <th>Title</th>
+                  <th>Releasedate</th>
+                  <th>Tracks</th>
+                </tr>
+              </thead>
+              <tbody id="albums-table-body"></tbody>
+            </table>`
     );
 
     const albumsTable = document.querySelector("#albums-table-body");
@@ -61,22 +60,21 @@ function showAlbums(filteredAlbums) {
 function showArtists(filteredArtists) {
     document.querySelector("#artists").insertAdjacentHTML(
         "beforeend",
-        `
+        /*html*/ `
             <h1>Artists</h1>
-  <table id="artists-table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Birthdate</th>
-        <th>Genres</th>
-        <th>Website</th>
-        <th>Image</th>
-        <th>Number of Albums</th>
-      </tr>
-    </thead>
-    <tbody id="artists-table-body"></tbody>
-  </table>
-  `
+            <table id="artists-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Birthdate</th>
+                  <th>Genres</th>
+                  <th>Website</th>
+                  <th>Image</th>
+                  <th>Number of Albums</th>
+                </tr>
+              </thead>
+              <tbody id="artists-table-body"></tbody>
+            </table>`
     );
 
     const artistsTable = document.querySelector("#artists-table-body");
@@ -103,18 +101,17 @@ function showArtists(filteredArtists) {
 function showTracks(filteredTracks) {
     document.querySelector("#tracks").insertAdjacentHTML(
         "beforeend",
-        `
+        /*html*/ `
             <h1>Tracks</h1>
-  <table id="tracks-table">
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Duration</th>
-      </tr>
-    </thead>
-    <tbody id="tracks-table-body"></tbody>
-  </table>
-  `
+            <table id="tracks-table">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Duration</th>
+                </tr>
+              </thead>
+              <tbody id="tracks-table-body"></tbody>
+            </table>`
     );
 
     const tracksTable = document.querySelector("#tracks-table-body");

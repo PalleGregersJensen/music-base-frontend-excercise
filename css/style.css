@@ -38,6 +38,14 @@ body {
     justify-content: center;
 }
 
+.header-title {
+    grid-column: 2;
+}
+
+.header-search {
+    grid-column: 4;
+}
+
 .searchfield {
     /* width: 100%; */
     padding: 5px;
@@ -98,16 +106,20 @@ table th {
 .footer {
     grid-row: 3;
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr 1fr 1fr; /* Opdel footer i fem kolonner */
+    grid-template-columns: 1fr 2fr 1fr 2fr 1fr; /* Opdel footer i fem kolonner */
     background-color: var(--header-footer-color); /* Tilpas baggrundsfarven efter dine præferencer */
     color: #fff; /* Tilpas tekstfarven efter dine præferencer */
     width: 100%; /* Fyld hele bredden af skærmen */
 }
 
-.footer-column {
-    padding: 10px; /* Tilpas padding efter dine præferencer */
+.footer-title {
+    padding: 10px 0;
+    text-align: center; /* Centrer overskriften i midterste kolonne */
+    grid-column: 2;
 }
 
-.footer-title {
-    text-align: center; /* Centrer overskriften i midterste kolonne */
+.footer-inspiration {
+    grid-column: 4;
+    text-align: center;
+    padding: 10px 0;
 }

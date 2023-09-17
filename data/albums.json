@@ -1,78 +1,205 @@
 [
     {
-        "title": "Back in Black",
-        "tracks": [
-            "Hells Bells",
-            "Shoot to Thrill",
-            "Back in Black",
-            "You Shook Me All Night Long",
-            "Rock and Roll Ain't Noise Pollution"
-        ],
-        "artist": "AC/DC",
-        "release_year": 1980,
-        "label": "Atlantic Records"
+        "albumID": 1,
+        "albumCover": "https://upload.wikimedia.org/wikipedia/en/thumb/4/4f/Ed_Sheeran_-_No._6_Collaborations_Project.png/220px-Ed_Sheeran_-_No._6_Collaborations_Project.png",
+        "releaseDate": "2019-07-12",
+        "albumTitle": "No.6 Collaborations Project",
+        "numberOfTracks": 8
     },
     {
-        "title": "Hotel California",
-        "tracks": ["Hotel California", "New Kid in Town", "Life in the Fast Lane", "Wasted Time", "Victim of Love"],
-        "artist": "Eagles",
-        "release_year": 1976,
-        "label": "Asylum Records"
+        "albumID": 2,
+        "albumCover": "https://th.bing.com/th/id/OIP.YbEYxqZ2kk2y561gijeQLwHaGw?w=166&h=180&c=7&r=0&o=5&pid=1.7",
+        "releaseDate": "2019-11-15",
+        "albumTitle": "Kidz Bop 40",
+        "numberOfTracks": 16
     },
     {
-        "title": "Led Zeppelin IV",
-        "tracks": ["Stairway to Heaven", "Black Dog", "Rock and Roll", "Misty Mountain Hop", "Going to California"],
-        "artist": "Led Zeppelin",
-        "release_year": 1971,
-        "label": "Atlantic Records"
+        "albumID": 3,
+        "albumCover": "https://upload.wikimedia.org/wikipedia/en/thumb/9/97/Camila_%28Official_Album_Cover%29_by_Camila_Cabello.png/220px-Camila_%28Official_Album_Cover%29_by_Camila_Cabello.png",
+        "releaseDate": "2018-01-12",
+        "albumTitle": "Camila",
+        "numberOfTracks": 11
     },
     {
-        "title": "The Wall",
-        "tracks": ["Another Brick in the Wall", "Comfortably Numb", "Hey You", "Mother", "Run Like Hell"],
-        "artist": "Pink Floyd",
-        "release_year": 1979,
-        "label": "Harvest Records"
+        "albumID": 4,
+        "albumCover": "https://upload.wikimedia.org/wikipedia/en/thumb/9/97/Cardi_B_-_Invasion_of_Privacy.png/220px-Cardi_B_-_Invasion_of_Privacy.png",
+        "releaseDate": "2018-04-06",
+        "albumTitle": "Invasion of Privacy",
+        "numberOfTracks": 13
     },
     {
-        "title": "Rumours",
-        "tracks": ["Go Your Own Way", "Dreams", "The Chain", "Don't Stop", "Gold Dust Woman"],
-        "artist": "Fleetwood Mac",
-        "release_year": 1977,
-        "label": "Warner Bros. Records"
+        "albumID": 5,
+        "albumCover": "https://upload.wikimedia.org/wikipedia/en/thumb/7/7d/Khalid_-_American_Teen.png/220px-Khalid_-_American_Teen.png",
+        "releaseDate": "2017-03-03",
+        "albumTitle": "American Teen",
+        "numberOfTracks": 15
     },
     {
-        "title": "Born to Run",
-        "tracks": ["Born to Run", "Thunder Road", "Jungleland", "She's the One", "Tenth Avenue Freeze-Out"],
-        "artist": "Bruce Springsteen",
-        "release_year": 1975,
-        "label": "Columbia Records"
+        "albumID": 6,
+        "albumCover": "https://upload.wikimedia.org/wikipedia/en/thumb/0/0c/Chance_the_Rapper_-_The_Big_Day.png/220px-Chance_the_Rapper_-_The_Big_Day.png",
+        "releaseDate": "2019-07-26",
+        "albumTitle": "The Big Day",
+        "numberOfTracks": 22
     },
     {
-        "title": "Who's Next",
-        "tracks": ["Baba O'Riley", "Behind Blue Eyes", "My Wife", "Going Mobile", "Behind Blue Eyes"],
-        "artist": "The Who",
-        "release_year": 1971,
-        "label": "Track Records"
+        "albumID": 7,
+        "albumCover": "https://upload.wikimedia.org/wikipedia/en/thumb/2/27/Justin_Bieber_-_Purpose_%28Official_Album_Cover%29.png/220px-Justin_Bieber_-_Purpose_%28Official_Album_Cover%29.png",
+        "releaseDate": "2015-11-13",
+        "albumTitle": "Purpose",
+        "numberOfTracks": 14
     },
     {
-        "title": "Dark Side of the Moon",
-        "tracks": ["Time", "Money", "Us and Them", "Breathe", "Brain Damage"],
-        "artist": "Pink Floyd",
-        "release_year": 1973,
-        "label": "Harvest Records"
+        "albumID": 8,
+        "albumCover": "https://upload.wikimedia.org/wikipedia/en/thumb/d/db/Chris_Stapleton_Starting_Over.jpg/220px-Chris_Stapleton_Starting_Over.jpg",
+        "releaseDate": "2020-11-13",
+        "albumTitle": "Starting Over",
+        "numberOfTracks": 14
     },
     {
-        "title": "Led Zeppelin II",
-        "tracks": ["Whole Lotta Love", "Heartbreaker", "Ramble On", "What Is and What Should Never Be", "Thank You"],
-        "artist": "Led Zeppelin",
-        "release_year": 1969,
-        "label": "Atlantic Records"
+        "albumID": 9,
+        "albumCover": "https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/Bruno_Mars_-_Doo-Wops_%26_Hooligans.png/220px-Bruno_Mars_-_Doo-Wops_%26_Hooligans.png",
+        "releaseDate": "2010-10-04",
+        "albumTitle": "Doo-Wops & Hooligans",
+        "numberOfTracks": 10
     },
     {
-        "title": "The Doors",
-        "tracks": ["Break On Through", "Light My Fire", "The End", "Soul Kitchen", "Twentieth Century Fox"],
-        "artist": "The Doors",
-        "release_year": 1967,
-        "label": "Elektra Records"
+        "albumID": 10,
+        "albumCover": "https://upload.wikimedia.org/wikipedia/en/thumb/0/0b/Astroworld_by_Travis_Scott.jpg/220px-Astroworld_by_Travis_Scott.jpg",
+        "releaseDate": "2018-08-03",
+        "albumTitle": "Astroworld",
+        "numberOfTracks": 17
+    },
+    {
+        "albumID": 11,
+        "albumCover": "https://upload.wikimedia.org/wikipedia/en/thumb/9/9b/Gang_Signs_%26_Prayer_cover.jpg/220px-Gang_Signs_%26_Prayer_cover.jpg",
+        "releaseDate": "2017-02-24",
+        "albumTitle": "Gang Signs & Prayer",
+        "numberOfTracks": 16
+    },
+    {
+        "albumID": 12,
+        "albumCover": "https://upload.wikimedia.org/wikipedia/en/thumb/9/9e/Paulo_Londra_-_Homerun.png/220px-Paulo_Londra_-_Homerun.png",
+        "releaseDate": "2019-05-23",
+        "albumTitle": "Homerun",
+        "numberOfTracks": 18
+    },
+    {
+        "albumID": 13,
+        "albumCover": "https://upload.wikimedia.org/wikipedia/en/thumb/3/3d/Dave_-_We%27re_All_Alone_in_This_Together.jpg/220px-Dave_-_We%27re_All_Alone_in_This_Together.jpg",
+        "releaseDate": "2021-07-23",
+        "albumTitle": "We're All Alone in This Together",
+        "numberOfTracks": 12
+    },
+    {
+        "albumID": 14,
+        "albumCover": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/EllaMaiSelfTitled.png/220px-EllaMaiSelfTitled.png",
+        "releaseDate": "2018-10-12",
+        "albumTitle": "Ella Mai",
+        "numberOfTracks": 15
+    },
+    {
+        "albumID": 15,
+        "albumCover": "https://upload.wikimedia.org/wikipedia/en/thumb/b/bf/Lil_Nas_X_-_Montero.png/220px-Lil_Nas_X_-_Montero.png",
+        "releaseDate": "2021-09-17",
+        "albumTitle": "Montero",
+        "numberOfTracks": 15
+    },
+    {
+        "albumID": 16,
+        "albumCover": "https://upload.wikimedia.org/wikipedia/en/thumb/b/b1/Lines%2C_Vines_and_Trying_Times_album_cover.jpg/220px-Lines%2C_Vines_and_Trying_Times_album_cover.jpg",
+        "releaseDate": "2009-06-12",
+        "albumTitle": "Lines, Vines and Trying Times",
+        "numberOfTracks": 13
+    },
+    {
+        "albumID": 17,
+        "albumCover": "https://upload.wikimedia.org/wikipedia/en/thumb/4/4b/Ariana_Grande_-_Dangerous_Woman_%28Official_Album_Cover%29.png/220px-Ariana_Grande_-_Dangerous_Woman_%28Official_Album_Cover%29.png",
+        "releaseDate": "2016-05-20",
+        "albumTitle": "Dangerous Woman",
+        "numberOfTracks": 11
+    },
+    {
+        "albumID": 18,
+        "albumCover": "https://upload.wikimedia.org/wikipedia/en/thumb/d/dd/Lizzo_-_Cuz_I_Love_You.png/220px-Lizzo_-_Cuz_I_Love_You.png",
+        "releaseDate": "2019-04-19",
+        "albumTitle": "Cuz I Love You",
+        "numberOfTracks": 11
+    },
+    {
+        "albumID": 19,
+        "albumCover": "https://upload.wikimedia.org/wikipedia/en/thumb/d/d2/Illuminate_%28Official_Album_Cover%29_by_Shawn_Mendes.png/220px-Illuminate_%28Official_Album_Cover%29_by_Shawn_Mendes.png",
+        "releaseDate": "2016-09-23",
+        "albumTitle": "Illuminate",
+        "numberOfTracks": 12
+    },
+    {
+        "albumID": 20,
+        "albumCover": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f6/Taylor_Swift_-_1989.png/220px-Taylor_Swift_-_1989.png",
+        "releaseDate": "2014-10-27",
+        "albumTitle": "1989",
+        "numberOfTracks": 13
+    },
+    {
+        "albumID": 21,
+        "albumCover": "https://upload.wikimedia.org/wikipedia/en/thumb/9/99/Sam_Smith_-_In_the_Lonely_Hour_%28Official_Album_Cover%29.png/220px-Sam_Smith_-_In_the_Lonely_Hour_%28Official_Album_Cover%29.png",
+        "releaseDate": "2014-05-26",
+        "albumTitle": "In the Lonely Hour",
+        "numberOfTracks": 14
+    },
+    {
+        "albumID": 22,
+        "albumCover": "https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/Beerbongs_%26_Bentleys_by_Post_Malone.png/220px-Beerbongs_%26_Bentleys_by_Post_Malone.png",
+        "releaseDate": "2018-04-27",
+        "albumTitle": "Beerbongs & Bentleys",
+        "numberOfTracks": 18
+    },
+    {
+        "albumID": 23,
+        "albumCover": "https://preview.redd.it/xnjh2eni2tw01.jpg?auto=webp&s=5f80f6b2d28e63211da925b9d8a70c95cf91cd08",
+        "releaseDate": "2018-05-04",
+        "albumTitle": "Swaecation",
+        "numberOfTracks": 9
+    },
+    {
+        "albumID": 24,
+        "albumCover": "https://upload.wikimedia.org/wikipedia/en/5/58/World_War_Joy.jpg",
+        "releaseDate": "2019-12-06",
+        "albumTitle": "World Way Joy",
+        "numberOfTracks": 10
+    },
+    {
+        "albumID": 25,
+        "albumCover": "https://upload.wikimedia.org/wikipedia/en/thumb/e/ea/5_Seconds_of_Summer_Youngblood.png/220px-5_Seconds_of_Summer_Youngblood.png",
+        "releaseDate": "2018-06-15",
+        "albumTitle": "Youngblood",
+        "numberOfTracks": 13
+    },
+    {
+        "albumID": 26,
+        "albumCover": "https://upload.wikimedia.org/wikipedia/en/thumb/b/b9/Ellie_Goulding_-_Lights_%28album%29.png/220px-Ellie_Goulding_-_Lights_%28album%29.png",
+        "releaseDate": "2010-05-26",
+        "albumTitle": "Lights",
+        "numberOfTracks": 10
+    },
+    {
+        "albumID": 27,
+        "albumCover": "https://upload.wikimedia.org/wikipedia/en/thumb/4/45/Florida_%28album%29_cover.jpg/220px-Florida_%28album%29_cover.jpg",
+        "releaseDate": "2004-09-21",
+        "albumTitle": "Florida",
+        "numberOfTracks": 11
+    },
+    {
+        "albumID": 28,
+        "albumCover": "https://upload.wikimedia.org/wikipedia/en/thumb/8/89/Blanco_Brown_-_Honeysuckle_%26_Lightning_Bugs.png/220px-Blanco_Brown_-_Honeysuckle_%26_Lightning_Bugs.png",
+        "releaseDate": "2019-10-11",
+        "albumTitle": "Honeysuckle & Lightning Bugs",
+        "numberOfTracks": 10
+    },
+    {
+        "albumID": 29,
+        "albumCover": "https://upload.wikimedia.org/wikipedia/en/thumb/c/c3/Born_This_Way_album_cover.png/220px-Born_This_Way_album_cover.png",
+        "releaseDate": "2011-05-23",
+        "albumTitle": "Born This Way",
+        "numberOfTracks": 14
     }
 ]

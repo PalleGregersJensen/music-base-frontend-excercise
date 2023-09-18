@@ -95,7 +95,7 @@ function showArtists(filteredArtists) {
     cell1.textContent = artist.name;
     cell2.textContent = artist.birthdate;
     cell3.textContent = artist.genres;
-    cell4.textContent = artist.website;
+    cell4.innerHTML = `<a href="${artist.website}"/> ${artist.website}`;
     cell5.innerHTML = `<img src="${artist.image}" />`;
     cell6.textContent = artist.numberOfAlbums;
   }

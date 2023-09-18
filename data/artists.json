@@ -4,7 +4,7 @@
     "name": "Ed Sheeran",
     "birthdate": "1991-02-17",
     "genres": "Pop, Folk-Pop, Soft-Rock",
-    "website": "edsheeran.com",
+    "website": "https://www.edsheeran.com",
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Ed_Sheeran-6886_%28cropped%29.jpg/220px-Ed_Sheeran-6886_%28cropped%29.jpg",
     "numberOfAlbums": 8
   },
@@ -13,7 +13,7 @@
     "name": "Camila Cabello",
     "birthdate": "1997-03-03",
     "genres": "Pop, Latin, R&B",
-    "website": "camilacabello.com",
+    "website": "https://www.camilacabello.com",
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Camila_Cabello_Vogue_2.jpg/220px-Camila_Cabello_Vogue_2.jpg",
     "numberOfAlbums": 3
   },
@@ -22,7 +22,7 @@
     "name": "Cardi B",
     "birthdate": "1992-10-11",
     "genres": "Hip Hop, Trap",
-    "website": "cardib.com",
+    "website": "https://www.cardib.com",
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Cardi_B_2021_02.jpg/220px-Cardi_B_2021_02.jpg",
     "numberOfAlbums": 1
   },
@@ -31,7 +31,7 @@
     "name": "Khalid",
     "birthdate": "1998-02-11",
     "genres": "R&B, Pop",
-    "website": "khalidofficial.com",
+    "website": "https://www.khalidofficial.com",
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Khalid_seoul_2018.jpg/220px-Khalid_seoul_2018.jpg",
     "numberOfAlbums": 2
   },

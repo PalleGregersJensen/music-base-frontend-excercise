@@ -8,9 +8,18 @@
     <title>MusicBase</title>
   </head>
   <body>
-
-    
-
-    <script src="app.js"></script>
+    <header>
+      <h1>MusicBase</h1>
+      <div>
+        <label for="input-search">Search:</label>
+        <input type="search" id="input-search" placeholder="Search for albums, tracks or artists" />
+      </div>
+    </header>
+    <div id="grid-container">
+      <section id="albums"></section>
+      <section id="artists"></section>
+      <section id="tracks"></section>
+    </div>
+    <script src="app.js" type="module"></script>
   </body>
 </html>

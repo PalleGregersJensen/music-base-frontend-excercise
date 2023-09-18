@@ -1,3 +1,64 @@
 body {
-    background-color: darkslategrey;
+  background-color: #f0f0f0; /* Light gray background */
+  margin: 0; /* Remove default body margin */
+}
+
+#grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 100%; /* Set max width to 100% of the screen width */
+  overflow: hidden; /* Hide horizontal scrollbar if content overflows */
+}
+
+#albums,
+#artists,
+#tracks {
+  padding-left: 25px;
+  padding-right: 25px; /* Add right padding to create space between columns */
+}
+
+/* Style for the tables */
+table {
+  width: 100%; /* Set table width to 100% */
+  max-width: 100%; /* Ensure the table doesn't exceed the screen width */
+  border-collapse: collapse;
+}
+
+/* Style for table cells */
+table td,
+table th {
+  border: 1px solid #e0e0e0; /* Light gray border */
+  padding: 10px;
+  text-align: center;
+}
+
+/* Style for album cover images */
+table img {
+  max-width: 90%;
+  height: auto;
+}
+
+/* Style for table headers */
+table th {
+  font-size: large;
+  padding: 5px;
+  font-weight: bold;
+  background-color: #333; /* Dark gray background for headers */
+  color: #fff; /* White text color for headers */
+}
+
+header {
+  align-content: center;
+  text-align: center;
+  background-color: #ff5733; /* A warm orange-red color */
+  padding-bottom: 20px;
+  padding-top: 10px;
+}
+
+#input-search {
+  width: 230px;
+}
+label {
+  font-weight: bold;
+  font-size: large;
 }

@@ -2,6 +2,8 @@
 
 window.addEventListener("load", initApp);
 
+
+const endpoint = "http://localhost:3333";
 let albums = [];
 let artists = [];
 let tracks = [];
@@ -9,32 +11,32 @@ let tracks = [];
 async function initApp() {
   console.log("app running!");
   document.querySelector("#searchfield").addEventListener("keyup", searchArtist);
-  albums = await getJasonData();
-  console.log(albums);
-  showAlbumsOnWebsite(albums);
-  artists = albums;
+  artists = await getJasonData();
+  // console.log(albums);
+  // showAlbumsOnWebsite(albums);
+  // artists = albums;
   console.log(artists);
   showArtistsOnWebsite(artists);
-  tracks = [].concat(
-    albums[0].tracks,
-    albums[1].tracks,
-    albums[2].tracks,
-    albums[3].tracks,
-    albums[4].tracks,
-    albums[5].tracks,
-    albums[6].tracks,
-    albums[7].tracks,
-    albums[8].tracks,
-    albums[9].tracks
-  );
-  console.log(albums[0].tracks);
-  console.log(tracks);
-  showTracksOnWebsite(tracks);
+  // tracks = [].concat(
+  //   albums[0].tracks,
+  //   albums[1].tracks,
+  //   albums[2].tracks,
+  //   albums[3].tracks,
+  //   albums[4].tracks,
+  //   albums[5].tracks,
+  //   albums[6].tracks,
+  //   albums[7].tracks,
+  //   albums[8].tracks,
+  //   albums[9].tracks
+  // );
+  // console.log(albums[0].tracks);
+  // console.log(tracks);
+  // showTracksOnWebsite(tracks);
 }
 
 // get Json-data
 async function getJasonData() {
-  const response = await fetch("albums.json");
+  const response = await fetch(`${endpoint}/artists/`);
   console.log(response);
   const data = await response.json();
   console.log(data);
@@ -51,10 +53,10 @@ function showAlbumsOnWebsite(albumList) {
 }
 
 // show artists on website
-function showArtistsOnWebsite(albumList) {
+function showArtistsOnWebsite(artistList) {
   document.querySelector("#artists").innerHTML = "Artists:";
-  for (const album of albumList) {
-    const artistHtml = /*html*/ `<br>${album.artist}`;
+  for (const artist of artistList) {
+    const artistHtml = /*html*/ `<br>${artist.artistName}`;
     document.querySelector("#artists").insertAdjacentHTML("beforeend", artistHtml);
   }
 }

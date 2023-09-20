@@ -1,6 +1,8 @@
+const endpoint = "http://localhost:3333";
+
 // get Json-data
 async function getAlbumData() {
-  const response = await fetch("/data/albums.json");
+  const response = await fetch(`${endpoint}/albums`);
   console.log(response);
   const data = await response.json();
   console.log(data);
@@ -9,7 +11,7 @@ async function getAlbumData() {
 
 // get Json-data
 async function getTrackData() {
-  const response = await fetch("/data/tracks.json");
+  const response = await fetch(`${endpoint}/tracks`);
   console.log(response);
   const data = await response.json();
   console.log(data);
@@ -18,38 +20,11 @@ async function getTrackData() {
 
 // get Json-data
 async function getArtistData() {
-  const response = await fetch("/data/artists.json");
+  const response = await fetch(`${endpoint}/artists`);
   console.log(response);
   const data = await response.json();
   console.log(data);
   return data;
 }
 
-// get Json-data
-async function getTrackArtistsData() {
-  const response = await fetch("/data/track_artists.json");
-  console.log(response);
-  const data = await response.json();
-  console.log(data);
-  return data;
-}
-
-// get Json-data
-async function getTrackAlbumsData() {
-  const response = await fetch("/data/track_albums.json");
-  console.log(response);
-  const data = await response.json();
-  console.log(data);
-  return data;
-}
-
-// get Json-data
-async function getAlbumArtistsData() {
-  const response = await fetch("/data/album_artists.json");
-  console.log(response);
-  const data = await response.json();
-  console.log(data);
-  return data;
-}
-
-export { getAlbumData, getArtistData, getTrackData, getTrackArtistsData, getTrackAlbumsData, getAlbumArtistsData };
+export { getAlbumData, getArtistData, getTrackData };

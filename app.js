@@ -1,22 +1,12 @@
 "use strict";
 
-import {
-  getAlbumData,
-  getArtistData,
-  getTrackData,
-  getTrackArtistsData,
-  getTrackAlbumsData,
-  getAlbumArtistsData,
-} from "./rest-service.js";
+import { getAlbumData, getArtistData, getTrackData } from "./rest-service.js";
 
 window.addEventListener("load", initApp);
 
 let albums = [];
 let artists = [];
 let tracks = [];
-let trackArtists = [];
-let trackAlbums = [];
-let albumArtists = [];
 
 let filteredAlbums = [];
 let filteredArtists = [];
@@ -28,9 +18,6 @@ async function initApp() {
   albums = await getAlbumData();
   artists = await getArtistData();
   tracks = await getTrackData();
-  trackArtists = await getTrackArtistsData();
-  trackAlbums = await getTrackAlbumsData();
-  albumArtists = await getAlbumArtistsData();
 
   showAlbums(albums);
   showArtists(artists);
@@ -114,8 +101,7 @@ function showArtists(filteredArtists) {
   }
 }
 
-// show tracks on website
-function showTracks(filteredTracks) {
+async function showTracks(filteredTracks) {
   document.querySelector("#tracks").insertAdjacentHTML(
     "beforeend",
     `
@@ -136,68 +122,68 @@ function showTracks(filteredTracks) {
 
   const tracksTable = document.querySelector("#tracks-table-body");
 
+  // Create an object to store unique tracks with their album IDs
+  const uniqueTracks = {};
+
   for (const track of filteredTracks) {
-    const row = tracksTable.insertRow();
-    const cell1 = row.insertCell(0);
-    const cell2 = row.insertCell(1);
-    const cell3 = row.insertCell(2);
-    const cell4 = row.insertCell(3);
-
-    cell1.textContent = track.trackName;
-    cell2.textContent = track.duration;
-
-    // Find artists and albums for the current track based on junction tables
-    const trackArtists = findTrackArtists(track.trackID); // Implement this function
-    const trackAlbums = findTrackAlbums(track.trackID); // Implement this function
-
-    // Create elements for artist images and album covers
-    const artistImages = trackArtists.map((artistName) => {
-      const artist = artists.find((artist) => artist.name === artistName);
-      return artist ? `<img src="${artist.image}" alt="${artist.name}" />` : "";
-    });
-    const albumCovers = trackAlbums.map((albumTitle) => {
-      const album = albums.find((album) => album.albumTitle === albumTitle);
-      return album ? `<img src="${album.albumCover}" alt="${album.albumTitle}" />` : "";
-    });
-
-    // Add artist images and album covers to the cells
-    cell3.innerHTML = artistImages.join(" ");
-    cell4.innerHTML = albumCovers.join(" ");
-  }
-}
-
-function findTrackArtists(trackID) {
-  const trackArtistsList = [];
-  for (const junction of trackArtists) {
-    if (junction.trackID === trackID) {
-      const artist = artists.find((artist) => artist.artistID === junction.artistID);
-      if (artist) {
-        trackArtistsList.push(artist.name);
-      }
+    // Use the trackID as the key to store unique tracks
+    if (!uniqueTracks.hasOwnProperty(track.trackID)) {
+      uniqueTracks[track.trackID] = {
+        trackName: track.trackName,
+        duration: track.duration,
+        artistNames: track.artistNames,
+        albumIDs: [track.albumID], // Start with an array containing the first album ID
+      };
+    } else {
+      // If the track already exists, add the album ID to its array
+      uniqueTracks[track.trackID].albumIDs.push(track.albumID);
     }
   }
-  return trackArtistsList;
-}
 
-function findTrackAlbums(trackID) {
-  const trackAlbumsList = [];
-  for (const junction of trackAlbums) {
-    if (junction.trackID === trackID) {
-      const album = albums.find((album) => album.albumID === junction.albumID);
-      if (album) {
-        trackAlbumsList.push(album.albumTitle);
-      }
+  // Loop through the unique tracks and display them in the table
+  for (const trackID in uniqueTracks) {
+    if (uniqueTracks.hasOwnProperty(trackID)) {
+      const track = uniqueTracks[trackID];
+      const row = tracksTable.insertRow();
+      const cell1 = row.insertCell(0);
+      const cell2 = row.insertCell(1);
+      const cell3 = row.insertCell(2);
+      const cell4 = row.insertCell(3);
+
+      cell1.textContent = track.trackName;
+      cell2.textContent = track.duration;
+      cell3.textContent = track.artistNames.join(", "); // Display artist names
+      cell4.textContent = track.albumIDs.join(", "); // Display album IDs as comma-separated
     }
   }
-  return trackAlbumsList;
 }
 
 function searchDatabase(event) {
   const value = event.target.value;
 
+  // Initialize filtered arrays
   filteredArtists = searchArtists(value);
   filteredAlbums = searchAlbums(value, filteredArtists);
-  filteredTracks = searchTracks(value, filteredArtists, filteredAlbums);
+
+  // Collect all album IDs from the filteredAlbums
+  const albumIDs = filteredAlbums.map((album) => album.albumID);
+
+  // Filter track IDs based on the collected album IDs
+  const filteredTrackIDs = tracks.filter((track) => albumIDs.includes(track.albumID)).map((track) => track.trackID);
+
+  // Filter artists based on the filtered album IDs
+  const filteredArtistIDs = albums
+    .filter((album) => albumIDs.includes(album.albumID))
+    .map((album) => album.artistIDs)
+    .flat();
+
+  // Filter artists based on the collected artist IDs and unique them
+  const uniqueFilteredArtistIDs = [...new Set(filteredArtistIDs)];
+
+  filteredArtists = artists.filter((artist) => uniqueFilteredArtistIDs.includes(artist.artistID));
+
+  // Filter tracks based on the filtered track IDs
+  filteredTracks = tracks.filter((track) => filteredTrackIDs.includes(track.trackID));
 
   // Clear the existing content of the tables
   clearTableContent();
@@ -208,13 +194,16 @@ function searchDatabase(event) {
   showTracks(filteredTracks);
 }
 
+// ... (other functions remain the same)
+
+// ... (other functions remain the same)
+
 function searchAlbums(searchValue, filteredArtists) {
   searchValue = searchValue.toLowerCase();
   const results = albums.filter((album) => {
-    const artistID = albumArtists.find((junction) => junction.albumID === album.albumID)?.artistID;
-
+    const artistNames = album.artistNames.map((name) => name.toLowerCase());
     const albumMatch = album.albumTitle.toLowerCase().includes(searchValue);
-    const artistMatch = filteredArtists.some((artist) => artist.artistID === artistID);
+    const artistMatch = filteredArtists.some((artist) => artistNames.includes(artist.name.toLowerCase()));
 
     return albumMatch || artistMatch;
   });
@@ -223,22 +212,7 @@ function searchAlbums(searchValue, filteredArtists) {
   return results;
 }
 
-function searchTracks(searchValue, filteredArtists, filteredAlbums) {
-  searchValue = searchValue.toLowerCase();
-  const results = tracks.filter((track) => {
-    const artistID = trackArtists.find((junction) => junction.trackID === track.trackID)?.artistID;
-    const albumID = trackAlbums.find((junction) => junction.trackID === track.trackID)?.albumID;
-
-    const trackMatch = track.trackName.toLowerCase().includes(searchValue);
-    const artistMatch = filteredArtists.some((artist) => artist.artistID === artistID);
-    const albumMatch = filteredAlbums.some((album) => album.albumID === albumID);
-
-    return trackMatch || artistMatch || albumMatch;
-  });
-
-  console.log("Tracks results:", results); // Log the search results
-  return results;
-}
+// ... (other functions remain the same)
 
 function clearTableContent() {
   // Clear the content of the artists, albums, and tracks tables

@@ -43,4 +43,13 @@ async function getTrackAlbumsData() {
   return data;
 }
 
-export { getAlbumData, getArtistData, getTrackData, getTrackArtistsData, getTrackAlbumsData };
+// get Json-data
+async function getAlbumArtistsData() {
+  const response = await fetch("/data/album_artists.json");
+  console.log(response);
+  const data = await response.json();
+  console.log(data);
+  return data;
+}
+
+export { getAlbumData, getArtistData, getTrackData, getTrackArtistsData, getTrackAlbumsData, getAlbumArtistsData };

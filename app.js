@@ -1,6 +1,13 @@
 "use strict";
 
-import { getAlbumData, getArtistData, getTrackData, getTrackArtistsData, getTrackAlbumsData } from "./rest-service.js";
+import {
+  getAlbumData,
+  getArtistData,
+  getTrackData,
+  getTrackArtistsData,
+  getTrackAlbumsData,
+  getAlbumArtistsData,
+} from "./rest-service.js";
 
 window.addEventListener("load", initApp);
 
@@ -9,6 +16,7 @@ let artists = [];
 let tracks = [];
 let trackArtists = [];
 let trackAlbums = [];
+let albumArtists = [];
 
 let filteredAlbums = [];
 let filteredArtists = [];
@@ -22,6 +30,7 @@ async function initApp() {
   tracks = await getTrackData();
   trackArtists = await getTrackArtistsData();
   trackAlbums = await getTrackAlbumsData();
+  albumArtists = await getAlbumArtistsData();
 
   showAlbums(albums);
   showArtists(artists);
@@ -183,13 +192,12 @@ function findTrackAlbums(trackID) {
   return trackAlbumsList;
 }
 
-// Search artists+tracks+albums
 function searchDatabase(event) {
   const value = event.target.value;
 
   filteredArtists = searchArtists(value);
-  filteredAlbums = searchAlbums(value);
-  filteredTracks = searchTracks(value);
+  filteredAlbums = searchAlbums(value, filteredArtists);
+  filteredTracks = searchTracks(value, filteredArtists, filteredAlbums);
 
   // Clear the existing content of the tables
   clearTableContent();
@@ -198,6 +206,38 @@ function searchDatabase(event) {
   showArtists(filteredArtists);
   showAlbums(filteredAlbums);
   showTracks(filteredTracks);
+}
+
+function searchAlbums(searchValue, filteredArtists) {
+  searchValue = searchValue.toLowerCase();
+  const results = albums.filter((album) => {
+    const artistID = albumArtists.find((junction) => junction.albumID === album.albumID)?.artistID;
+
+    const albumMatch = album.albumTitle.toLowerCase().includes(searchValue);
+    const artistMatch = filteredArtists.some((artist) => artist.artistID === artistID);
+
+    return albumMatch || artistMatch;
+  });
+
+  console.log("Albums results:", results); // Log the search results
+  return results;
+}
+
+function searchTracks(searchValue, filteredArtists, filteredAlbums) {
+  searchValue = searchValue.toLowerCase();
+  const results = tracks.filter((track) => {
+    const artistID = trackArtists.find((junction) => junction.trackID === track.trackID)?.artistID;
+    const albumID = trackAlbums.find((junction) => junction.trackID === track.trackID)?.albumID;
+
+    const trackMatch = track.trackName.toLowerCase().includes(searchValue);
+    const artistMatch = filteredArtists.some((artist) => artist.artistID === artistID);
+    const albumMatch = filteredAlbums.some((album) => album.albumID === albumID);
+
+    return trackMatch || artistMatch || albumMatch;
+  });
+
+  console.log("Tracks results:", results); // Log the search results
+  return results;
 }
 
 function clearTableContent() {
@@ -210,19 +250,5 @@ function searchArtists(searchValue) {
   searchValue = searchValue.toLowerCase();
   const results = artists.filter((artist) => artist.name.toLowerCase().includes(searchValue));
   console.log("Artists results:", results); // Log the search results
-  return results;
-}
-
-function searchAlbums(searchValue) {
-  searchValue = searchValue.toLowerCase();
-  const results = albums.filter((album) => album.albumTitle.toLowerCase().includes(searchValue));
-  console.log("Albums results:", results); // Log the search results
-  return results;
-}
-
-function searchTracks(searchValue) {
-  searchValue = searchValue.toLowerCase();
-  const results = tracks.filter((track) => track.trackName.toLowerCase().includes(searchValue));
-  console.log("Tracks results:", results); // Log the search results
   return results;
 }

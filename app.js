@@ -55,7 +55,7 @@ function showAlbums(filteredAlbums) {
     cell1.innerHTML = `<img src="${album.albumCover}" />`;
     cell2.textContent = album.albumTitle;
     cell3.textContent = album.releaseDate;
-    cell4.textContent = album.numberOfTracks;
+    cell4.textContent = album.numberofTracks;
   }
 }
 

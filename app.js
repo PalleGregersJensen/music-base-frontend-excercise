@@ -11,6 +11,8 @@ let tracks = [];
 let filteredAlbums = [];
 let filteredArtists = [];
 let filteredTracks = [];
+let albumsTableBody; // Define albumsTableBody as a global variable
+let artistsTableBody;
 
 async function initApp() {
   console.log("app running!");
@@ -22,6 +24,113 @@ async function initApp() {
   showAlbums(albums);
   showArtists(artists);
   showTracks(tracks);
+
+  albumsTableBody = document.querySelector("#albums-table-body");
+  artistsTableBody = document.querySelector("#artists-table-body");
+
+  albumsTableBody.addEventListener("mouseover", (event) => {
+    const targetRow = event.target.closest(".album-row");
+    if (targetRow) {
+      const albumID = targetRow.dataset.albumId;
+      console.log(albumID);
+      const albumTracks = tracks.filter((track) => track.albumID === parseInt(albumID));
+      console.log(albumTracks);
+      const trackInfoTable = createTrackInfoTable(albumTracks);
+      if (trackInfoTable) {
+        targetRow.appendChild(trackInfoTable);
+      }
+    }
+  });
+
+  albumsTableBody.addEventListener("mouseout", (event) => {
+    const targetRow = event.target.closest(".album-row");
+    if (targetRow) {
+      const trackInfoTable = targetRow.querySelector(".track-info-table");
+      if (trackInfoTable) {
+        trackInfoTable.remove();
+      }
+    }
+  });
+
+  artistsTableBody.addEventListener("mouseover", (event) => {
+    const targetRow = event.target.closest(".artist-row");
+    if (targetRow) {
+      const artistID = targetRow.dataset.artistId;
+      const artistAlbums = albums.filter((album) => album.artistIDs.includes(parseInt(artistID)));
+      const albumInfoTable = createAlbumInfoTable(artistAlbums);
+      if (albumInfoTable) {
+        targetRow.appendChild(albumInfoTable);
+      }
+    }
+  });
+
+  artistsTableBody.addEventListener("mouseout", (event) => {
+    const targetRow = event.target.closest(".artist-row");
+    if (targetRow) {
+      const albumInfoTable = targetRow.querySelector(".album-info-table");
+      if (albumInfoTable) {
+        albumInfoTable.remove();
+      }
+    }
+  });
+}
+
+// Create a function to generate album info table
+function createAlbumInfoTable(artistAlbums) {
+  const albumInfoTable = document.createElement("table");
+  albumInfoTable.classList.add("album-info-table");
+  const albumInfoTableBody = document.createElement("tbody");
+
+  // Create the table header
+  const headerRow = albumInfoTableBody.insertRow();
+  const headerCell1 = headerRow.insertCell(0);
+  const headerCell2 = headerRow.insertCell(1);
+  const headerCell3 = headerRow.insertCell(2);
+  const headerCell4 = headerRow.insertCell(3);
+  headerCell1.textContent = "Albumcover";
+  headerCell2.textContent = "Albumtitle";
+  headerCell3.textContent = "Release Date";
+  headerCell4.textContent = "Number of Tracks";
+
+  for (const artistAlbum of artistAlbums) {
+    const row = albumInfoTableBody.insertRow();
+    const cell1 = row.insertCell(0);
+    const cell2 = row.insertCell(1);
+    const cell3 = row.insertCell(2);
+    const cell4 = row.insertCell(3);
+
+    cell1.innerHTML = `<img src="${artistAlbum.albumCover}" />`;
+    cell2.textContent = artistAlbum.albumTitle;
+    cell3.textContent = artistAlbum.releaseDate;
+    cell4.textContent = artistAlbum.numberofTracks;
+  }
+
+  albumInfoTable.appendChild(albumInfoTableBody);
+  return albumInfoTable;
+}
+
+function createTrackInfoTable(albumTracks) {
+  const trackInfoTable = document.createElement("table");
+  trackInfoTable.classList.add("track-info-table");
+  const trackInfoTableBody = document.createElement("tbody");
+
+  // Create the table header
+  const headerRow = trackInfoTableBody.insertRow();
+  const headerCell1 = headerRow.insertCell(0);
+  const headerCell2 = headerRow.insertCell(1);
+  headerCell1.textContent = "Trackname";
+  headerCell2.textContent = "Duration";
+
+  for (const albumTrack of albumTracks) {
+    const row = trackInfoTableBody.insertRow();
+    const cell1 = row.insertCell(0);
+    const cell2 = row.insertCell(1);
+    cell1.textContent = albumTrack.trackName;
+    cell2.textContent = albumTrack.duration;
+  }
+
+  trackInfoTable.appendChild(trackInfoTableBody);
+  return trackInfoTable;
 }
 
 function showAlbums(filteredAlbums) {
@@ -47,6 +156,8 @@ function showAlbums(filteredAlbums) {
 
   for (const album of filteredAlbums) {
     const row = albumsTable.insertRow();
+    row.classList.add("album-row"); // Add the "album-row" class to the row
+    row.dataset.albumId = album.albumID; // Set the dataset-album-id attribute
     const cell1 = row.insertCell(0);
     const cell2 = row.insertCell(1);
     const cell3 = row.insertCell(2);
@@ -85,6 +196,8 @@ function showArtists(filteredArtists) {
 
   for (const artist of filteredArtists) {
     const row = artistsTable.insertRow();
+    row.classList.add("artist-row"); // Add the "artist-row" class to the row
+    row.dataset.artistId = artist.artistID; // Set the dataset-artist-id attribute
     const cell1 = row.insertCell(0);
     const cell2 = row.insertCell(1);
     const cell3 = row.insertCell(2);
@@ -164,26 +277,7 @@ function searchDatabase(event) {
   // Initialize filtered arrays
   filteredArtists = searchArtists(value);
   filteredAlbums = searchAlbums(value, filteredArtists);
-
-  // Collect all album IDs from the filteredAlbums
-  const albumIDs = filteredAlbums.map((album) => album.albumID);
-
-  // Filter track IDs based on the collected album IDs
-  const filteredTrackIDs = tracks.filter((track) => albumIDs.includes(track.albumID)).map((track) => track.trackID);
-
-  // Filter artists based on the filtered album IDs
-  const filteredArtistIDs = albums
-    .filter((album) => albumIDs.includes(album.albumID))
-    .map((album) => album.artistIDs)
-    .flat();
-
-  // Filter artists based on the collected artist IDs and unique them
-  const uniqueFilteredArtistIDs = [...new Set(filteredArtistIDs)];
-
-  filteredArtists = artists.filter((artist) => uniqueFilteredArtistIDs.includes(artist.artistID));
-
-  // Filter tracks based on the filtered track IDs
-  filteredTracks = tracks.filter((track) => filteredTrackIDs.includes(track.trackID));
+  filteredTracks = searchTracks(value, filteredAlbums);
 
   // Clear the existing content of the tables
   clearTableContent();
@@ -194,18 +288,11 @@ function searchDatabase(event) {
   showTracks(filteredTracks);
 }
 
-// ... (other functions remain the same)
-
-// ... (other functions remain the same)
-
 function searchAlbums(searchValue, filteredArtists) {
   searchValue = searchValue.toLowerCase();
   const results = albums.filter((album) => {
-    const artistNames = album.artistNames.map((name) => name.toLowerCase());
     const albumMatch = album.albumTitle.toLowerCase().includes(searchValue);
-    const artistMatch = filteredArtists.some((artist) => artistNames.includes(artist.name.toLowerCase()));
-
-    return albumMatch || artistMatch;
+    return albumMatch;
   });
 
   console.log("Albums results:", results); // Log the search results
@@ -224,5 +311,16 @@ function searchArtists(searchValue) {
   searchValue = searchValue.toLowerCase();
   const results = artists.filter((artist) => artist.name.toLowerCase().includes(searchValue));
   console.log("Artists results:", results); // Log the search results
+  return results;
+}
+
+function searchTracks(searchValue, filteredAlbums) {
+  searchValue = searchValue.toLowerCase();
+  const results = tracks.filter((track) => {
+    const trackMatch = track.trackName.toLowerCase().includes(searchValue);
+    return trackMatch;
+  });
+
+  console.log("Tracks results:", results); // Log the search results
   return results;
 }

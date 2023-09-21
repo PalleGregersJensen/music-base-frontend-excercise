@@ -62,3 +62,21 @@ label {
   font-weight: bold;
   font-size: large;
 }
+
+/* Apply glowing effect when hovering over album rows */
+.album-row:hover {
+  box-shadow: 0 0 10px #ff5733; /* Bright orange glowing effect */
+}
+
+/* Apply glowing effect when hovering over artist rows */
+.artist-row:hover {
+  box-shadow: 0 0 10px #ff5733; /* Bright orange glowing effect */
+}
+
+/* Apply glowing effect to the inserted album info and track info tables */
+.album-row:hover .album-info-table,
+.album-row:hover .track-info-table,
+.artist-row:hover .album-info-table,
+.artist-row:hover .track-info-table {
+  box-shadow: 0 0 10px #ff5733; /* Bright orange glowing effect */
+}

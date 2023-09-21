@@ -92,6 +92,12 @@ function createAlbumInfoTable(artistAlbums) {
   headerCell3.textContent = "Release Date";
   headerCell4.textContent = "Number of Tracks";
 
+  // Apply bold style to the header cells
+  headerCell1.style.fontWeight = "bold";
+  headerCell2.style.fontWeight = "bold";
+  headerCell3.style.fontWeight = "bold";
+  headerCell4.style.fontWeight = "bold";
+
   for (const artistAlbum of artistAlbums) {
     const row = albumInfoTableBody.insertRow();
     const cell1 = row.insertCell(0);
@@ -120,6 +126,10 @@ function createTrackInfoTable(albumTracks) {
   const headerCell2 = headerRow.insertCell(1);
   headerCell1.textContent = "Trackname";
   headerCell2.textContent = "Duration";
+
+  // Apply bold style to the header cells
+  headerCell1.style.fontWeight = "bold";
+  headerCell2.style.fontWeight = "bold";
 
   for (const albumTrack of albumTracks) {
     const row = trackInfoTableBody.insertRow();

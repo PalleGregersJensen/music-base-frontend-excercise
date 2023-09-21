@@ -69,7 +69,8 @@ label {
 }
 
 /* Apply glowing effect when hovering over artist rows */
-.artist-row:hover {
+.artist-row:hover,
+.tracks-row:hover {
   box-shadow: 0 0 10px #ff5733; /* Bright orange glowing effect */
 }
 

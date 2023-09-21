@@ -258,6 +258,7 @@ async function showTracks(filteredTracks) {
     if (uniqueTracks.hasOwnProperty(trackID)) {
       const track = uniqueTracks[trackID];
       const row = tracksTable.insertRow();
+      row.classList.add("tracks-row");
       const cell1 = row.insertCell(0);
       const cell2 = row.insertCell(1);
       const cell3 = row.insertCell(2);

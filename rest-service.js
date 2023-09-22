@@ -1,4 +1,4 @@
-const endpoint = "http://localhost:3333";
+const endpoint = "https://musicbase-backend-jmmp.azurewebsites.net/";
 
 // get Json-data
 async function getAlbumData() {

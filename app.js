@@ -277,7 +277,13 @@ async function showTracks(filteredTracks) {
       cell1.textContent = track.trackName;
       cell2.textContent = track.duration;
       cell3.textContent = track.artistNames.join(", "); // Display artist names
-      cell4.textContent = track.albumIDs.join(", "); // Display album IDs as comma-separated
+      // Map album IDs to album titles
+      const albumTitles = track.albumIDs.map((albumID) => {
+        const album = albums.find((album) => album.albumID === albumID);
+        return album ? album.albumTitle : ""; // If album is found, return its title; otherwise, return an empty string
+      });
+
+      cell4.textContent = albumTitles.join(", ");
     }
   }
 }

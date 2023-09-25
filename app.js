@@ -29,15 +29,30 @@ async function initApp() {
   artistsTableBody = document.querySelector("#artists-table-body");
 
   albumsTableBody.addEventListener("mouseover", (event) => {
-    const targetRow = event.target.closest(".album-row");
-    if (targetRow) {
-      const albumID = targetRow.dataset.albumId;
-      console.log(albumID);
-      const albumTracks = tracks.filter((track) => track.albumID === parseInt(albumID));
-      console.log(albumTracks);
-      const trackInfoTable = createTrackInfoTable(albumTracks);
-      if (trackInfoTable) {
-        targetRow.appendChild(trackInfoTable);
+    if (filteredAlbums.length > 0) {
+      console.log(filteredAlbums);
+      const targetRow = event.target.closest(".album-row");
+      if (targetRow) {
+        const albumID = targetRow.dataset.albumId;
+        console.log(albumID);
+        const filteredAlbumTracks = filteredTracks.filter((track) => track.albumID === parseInt(albumID));
+        console.log(filteredAlbumTracks);
+        const trackInfoTable = createTrackInfoTable(filteredAlbumTracks);
+        if (trackInfoTable) {
+          targetRow.appendChild(trackInfoTable);
+        }
+      }
+    } else {
+      const targetRow = event.target.closest(".album-row");
+      if (targetRow) {
+        const albumID = targetRow.dataset.albumId;
+        console.log(albumID);
+        const albumTracks = tracks.filter((track) => track.albumID === parseInt(albumID));
+        console.log(albumTracks);
+        const trackInfoTable = createTrackInfoTable(albumTracks);
+        if (trackInfoTable) {
+          targetRow.appendChild(trackInfoTable);
+        }
       }
     }
   });

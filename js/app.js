@@ -22,25 +22,43 @@ async function initApp() {
   console.log("app running!");
   document.querySelector("#input-search").addEventListener("keyup", searchDatabase);
   albums = await getAlbumData();
-  console.log(albums);
   artists = await getArtistData();
   tracks = await getTrackData();
+  // Group tracks by trackName
+  const groupedTracks = groupTracksByTrackName(tracks);
 
   // Create an instance of Renderers
   const albumRenderer = new Albumrenderer();
-  const trackRenderer = new Trackrenderer();
+  const trackRenderer = new Trackrenderer(albums);
   const artistRenderer = new Artistrenderer();
 
   //display lists
   const albumList = new ListRenderer(albums, "#albums-table-body", albumRenderer);
   albumList.render();
-  const trackList = new ListRenderer(tracks, "#tracks-table-body", trackRenderer);
+  const trackList = new ListRenderer(groupedTracks, "#tracks-table-body", trackRenderer);
   trackList.render();
   const artistList = new ListRenderer(artists, "#artists-table-body", artistRenderer);
   artistList.render();
-  //showAlbums(albums);
-  // showArtists(artists);
-  //showTracks(tracks);
+
+  function groupTracksByTrackName(tracks) {
+    const groupedTracks = {};
+
+    for (const track of tracks) {
+      if (groupedTracks.hasOwnProperty(track.trackName)) {
+        // If the trackName is already in the groupedTracks object, add the albumID to the existing entry
+        groupedTracks[track.trackName].albumIDs.push(track.albumID);
+      } else {
+        // If the trackName is not in the groupedTracks object, create a new entry
+        groupedTracks[track.trackName] = {
+          ...track, // Copy all properties from the first occurrence of the trackName
+          albumIDs: [track.albumID], // Create an array for albumIDs
+        };
+      }
+    }
+
+    // Convert the groupedTracks object back to an array
+    return Object.values(groupedTracks);
+  }
 
   albumsTableBody = document.querySelector("#albums-table-body");
   artistsTableBody = document.querySelector("#artists-table-body");
@@ -175,150 +193,69 @@ function createTrackInfoTable(albumTracks) {
   return trackInfoTable;
 }
 
-function showAlbums(filteredAlbums) {
-  document.querySelector("#albums").insertAdjacentHTML(
-    "beforeend",
-    `
-            <h1>Albums</h1>
-  <table id="albums-table">
-    <thead>
-      <tr>
-        <th>Cover</th>
-        <th>Title</th>
-        <th>Releasedate</th>
-        <th>Tracks</th>
-      </tr>
-    </thead>
-    <tbody id="albums-table-body"></tbody>
-  </table>
-  `
-  );
+// async function showTracks(filteredTracks) {
+//   document.querySelector("#tracks").insertAdjacentHTML(
+//     "beforeend",
+//     `
+//     <h1>Tracks</h1>
+//     <table id="tracks-table">
+//       <thead>
+//         <tr>
+//           <th>Title</th>
+//           <th>Duration</th>
+//           <th>Artists</th>
+//           <th>Albums</th>
+//         </tr>
+//       </thead>
+//       <tbody id="tracks-table-body"></tbody>
+//     </table>
+//   `
+//   );
 
-  const albumsTable = document.querySelector("#albums-table-body");
+//   const tracksTable = document.querySelector("#tracks-table-body");
 
-  for (const album of filteredAlbums) {
-    const row = albumsTable.insertRow();
-    row.classList.add("album-row"); // Add the "album-row" class to the row
-    row.dataset.albumId = album.albumID; // Set the dataset-album-id attribute
-    const cell1 = row.insertCell(0);
-    const cell2 = row.insertCell(1);
-    const cell3 = row.insertCell(2);
-    const cell4 = row.insertCell(3);
+//   // Create an object to store unique tracks with their album IDs
+//   const uniqueTracks = {};
 
-    cell1.innerHTML = `<img src="${album.albumCover}" />`;
-    cell2.textContent = album.albumTitle;
-    cell3.textContent = album.releaseDate;
-    cell4.textContent = album.numberofTracks;
-  }
-}
+//   for (const track of filteredTracks) {
+//     // Use the trackID as the key to store unique tracks
+//     if (!uniqueTracks.hasOwnProperty(track.trackID)) {
+//       uniqueTracks[track.trackID] = {
+//         trackName: track.trackName,
+//         duration: track.duration,
+//         artistNames: track.artistNames,
+//         albumIDs: [track.albumID], // Start with an array containing the first album ID
+//       };
+//     } else {
+//       // If the track already exists, add the album ID to its array
+//       uniqueTracks[track.trackID].albumIDs.push(track.albumID);
+//     }
+//   }
 
-// show artists on website
-function showArtists(filteredArtists) {
-  document.querySelector("#artists").insertAdjacentHTML(
-    "beforeend",
-    `
-            <h1>Artists</h1>
-  <table id="artists-table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Birthdate</th>
-        <th>Genres</th>
-        <th>Website</th>
-        <th>Image</th>
-        <th>Number of Albums</th>
-      </tr>
-    </thead>
-    <tbody id="artists-table-body"></tbody>
-  </table>
-  `
-  );
+//   // Loop through the unique tracks and display them in the table
+//   for (const trackID in uniqueTracks) {
+//     if (uniqueTracks.hasOwnProperty(trackID)) {
+//       const track = uniqueTracks[trackID];
+//       const row = tracksTable.insertRow();
+//       row.classList.add("tracks-row");
+//       const cell1 = row.insertCell(0);
+//       const cell2 = row.insertCell(1);
+//       const cell3 = row.insertCell(2);
+//       const cell4 = row.insertCell(3);
 
-  const artistsTable = document.querySelector("#artists-table-body");
+//       cell1.textContent = track.trackName;
+//       cell2.textContent = track.duration;
+//       cell3.textContent = track.artistNames.join(", "); // Display artist names
+//       // Map album IDs to album titles
+//       const albumTitles = track.albumIDs.map((albumID) => {
+//         const album = albums.find((album) => album.albumID === albumID);
+//         return album ? album.albumTitle : ""; // If album is found, return its title; otherwise, return an empty string
+//       });
 
-  for (const artist of filteredArtists) {
-    const row = artistsTable.insertRow();
-    row.classList.add("artist-row"); // Add the "artist-row" class to the row
-    row.dataset.artistId = artist.artistID; // Set the dataset-artist-id attribute
-    const cell1 = row.insertCell(0);
-    const cell2 = row.insertCell(1);
-    const cell3 = row.insertCell(2);
-    const cell4 = row.insertCell(3);
-    const cell5 = row.insertCell(4);
-    const cell6 = row.insertCell(5);
-
-    cell1.textContent = artist.name;
-    cell2.textContent = artist.birthdate;
-    cell3.textContent = artist.genres;
-    cell4.innerHTML = `<a href="${artist.website}"/> ${artist.website}`;
-    cell5.innerHTML = `<img src="${artist.image}" />`;
-    cell6.textContent = artist.numberOfAlbums;
-  }
-}
-
-async function showTracks(filteredTracks) {
-  document.querySelector("#tracks").insertAdjacentHTML(
-    "beforeend",
-    `
-    <h1>Tracks</h1>
-    <table id="tracks-table">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Duration</th>
-          <th>Artists</th>
-          <th>Albums</th>
-        </tr>
-      </thead>
-      <tbody id="tracks-table-body"></tbody>
-    </table>
-  `
-  );
-
-  const tracksTable = document.querySelector("#tracks-table-body");
-
-  // Create an object to store unique tracks with their album IDs
-  const uniqueTracks = {};
-
-  for (const track of filteredTracks) {
-    // Use the trackID as the key to store unique tracks
-    if (!uniqueTracks.hasOwnProperty(track.trackID)) {
-      uniqueTracks[track.trackID] = {
-        trackName: track.trackName,
-        duration: track.duration,
-        artistNames: track.artistNames,
-        albumIDs: [track.albumID], // Start with an array containing the first album ID
-      };
-    } else {
-      // If the track already exists, add the album ID to its array
-      uniqueTracks[track.trackID].albumIDs.push(track.albumID);
-    }
-  }
-
-  // Loop through the unique tracks and display them in the table
-  for (const trackID in uniqueTracks) {
-    if (uniqueTracks.hasOwnProperty(trackID)) {
-      const track = uniqueTracks[trackID];
-      const row = tracksTable.insertRow();
-      row.classList.add("tracks-row");
-      const cell1 = row.insertCell(0);
-      const cell2 = row.insertCell(1);
-      const cell3 = row.insertCell(2);
-      const cell4 = row.insertCell(3);
-
-      cell1.textContent = track.trackName;
-      cell2.textContent = track.duration;
-      cell3.textContent = track.artistNames.join(", "); // Display artist names
-      // Map album IDs to album titles
-      const albumTitles = track.albumIDs.map((albumID) => {
-        const album = albums.find((album) => album.albumID === albumID);
-        return album ? album.albumTitle : ""; // If album is found, return its title; otherwise, return an empty string
-      });
-
-      cell4.textContent = albumTitles.join(", ");
-    }
-  }
-}
+//       cell4.textContent = albumTitles.join(", ");
+//     }
+//   }
+// }
 
 function searchDatabase(event) {
   const value = event.target.value;

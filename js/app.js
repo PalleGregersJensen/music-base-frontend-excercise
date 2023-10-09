@@ -12,15 +12,15 @@ let albums = [];
 let artists = [];
 let tracks = [];
 
-let filteredAlbums = [];
-let filteredArtists = [];
-let filteredTracks = [];
+// let filteredAlbums = [];
+// let filteredArtists = [];
+// let filteredTracks = [];
 let albumsTableBody; // Define albumsTableBody as a global variable
 let artistsTableBody;
 
 async function initApp() {
   console.log("app running!");
-  document.querySelector("#input-search").addEventListener("keyup", searchDatabase);
+  // document.querySelector("#input-search").addEventListener("keyup", searchDatabase);
   albums = await getAlbumData();
   artists = await getArtistData();
   tracks = await getTrackData();
@@ -193,120 +193,56 @@ function createTrackInfoTable(albumTracks) {
   return trackInfoTable;
 }
 
-// async function showTracks(filteredTracks) {
-//   document.querySelector("#tracks").insertAdjacentHTML(
-//     "beforeend",
-//     `
-//     <h1>Tracks</h1>
-//     <table id="tracks-table">
-//       <thead>
-//         <tr>
-//           <th>Title</th>
-//           <th>Duration</th>
-//           <th>Artists</th>
-//           <th>Albums</th>
-//         </tr>
-//       </thead>
-//       <tbody id="tracks-table-body"></tbody>
-//     </table>
-//   `
-//   );
+// function searchDatabase(event) {
+//   const value = event.target.value;
 
-//   const tracksTable = document.querySelector("#tracks-table-body");
+//   // Initialize filtered arrays
+//   filteredArtists = searchArtists(value);
+//   filteredAlbums = searchAlbums(value, filteredArtists);
+//   filteredTracks = searchTracks(value, filteredAlbums);
 
-//   // Create an object to store unique tracks with their album IDs
-//   const uniqueTracks = {};
+//   // Clear the existing content of the tables
+//   clearTableContent();
 
-//   for (const track of filteredTracks) {
-//     // Use the trackID as the key to store unique tracks
-//     if (!uniqueTracks.hasOwnProperty(track.trackID)) {
-//       uniqueTracks[track.trackID] = {
-//         trackName: track.trackName,
-//         duration: track.duration,
-//         artistNames: track.artistNames,
-//         albumIDs: [track.albumID], // Start with an array containing the first album ID
-//       };
-//     } else {
-//       // If the track already exists, add the album ID to its array
-//       uniqueTracks[track.trackID].albumIDs.push(track.albumID);
-//     }
-//   }
-
-//   // Loop through the unique tracks and display them in the table
-//   for (const trackID in uniqueTracks) {
-//     if (uniqueTracks.hasOwnProperty(trackID)) {
-//       const track = uniqueTracks[trackID];
-//       const row = tracksTable.insertRow();
-//       row.classList.add("tracks-row");
-//       const cell1 = row.insertCell(0);
-//       const cell2 = row.insertCell(1);
-//       const cell3 = row.insertCell(2);
-//       const cell4 = row.insertCell(3);
-
-//       cell1.textContent = track.trackName;
-//       cell2.textContent = track.duration;
-//       cell3.textContent = track.artistNames.join(", "); // Display artist names
-//       // Map album IDs to album titles
-//       const albumTitles = track.albumIDs.map((albumID) => {
-//         const album = albums.find((album) => album.albumID === albumID);
-//         return album ? album.albumTitle : ""; // If album is found, return its title; otherwise, return an empty string
-//       });
-
-//       cell4.textContent = albumTitles.join(", ");
-//     }
-//   }
+//   // Update the tables with the filtered results
+//   showArtists(filteredArtists);
+//   showAlbums(filteredAlbums);
+//   showTracks(filteredTracks);
 // }
 
-function searchDatabase(event) {
-  const value = event.target.value;
+// function searchAlbums(searchValue, filteredArtists) {
+//   searchValue = searchValue.toLowerCase();
+//   const results = albums.filter((album) => {
+//     const albumMatch = album.albumTitle.toLowerCase().includes(searchValue);
+//     return albumMatch;
+//   });
 
-  // Initialize filtered arrays
-  filteredArtists = searchArtists(value);
-  filteredAlbums = searchAlbums(value, filteredArtists);
-  filteredTracks = searchTracks(value, filteredAlbums);
+//   console.log("Albums results:", results); // Log the search results
+//   return results;
+// }
 
-  // Clear the existing content of the tables
-  clearTableContent();
+// // ... (other functions remain the same)
 
-  // Update the tables with the filtered results
-  showArtists(filteredArtists);
-  showAlbums(filteredAlbums);
-  showTracks(filteredTracks);
-}
+// function clearTableContent() {
+//   // Clear the content of the artists, albums, and tracks tables
+//   document.querySelector("#artists").innerHTML = "";
+//   document.querySelector("#albums").innerHTML = "";
+//   document.querySelector("#tracks").innerHTML = "";
+// }
+// function searchArtists(searchValue) {
+//   searchValue = searchValue.toLowerCase();
+//   const results = artists.filter((artist) => artist.name.toLowerCase().includes(searchValue));
+//   console.log("Artists results:", results); // Log the search results
+//   return results;
+// }
 
-function searchAlbums(searchValue, filteredArtists) {
-  searchValue = searchValue.toLowerCase();
-  const results = albums.filter((album) => {
-    const albumMatch = album.albumTitle.toLowerCase().includes(searchValue);
-    return albumMatch;
-  });
+// function searchTracks(searchValue, filteredAlbums) {
+//   searchValue = searchValue.toLowerCase();
+//   const results = tracks.filter((track) => {
+//     const trackMatch = track.trackName.toLowerCase().includes(searchValue);
+//     return trackMatch;
+//   });
 
-  console.log("Albums results:", results); // Log the search results
-  return results;
-}
-
-// ... (other functions remain the same)
-
-function clearTableContent() {
-  // Clear the content of the artists, albums, and tracks tables
-  document.querySelector("#artists").innerHTML = "";
-  document.querySelector("#albums").innerHTML = "";
-  document.querySelector("#tracks").innerHTML = "";
-}
-function searchArtists(searchValue) {
-  searchValue = searchValue.toLowerCase();
-  const results = artists.filter((artist) => artist.name.toLowerCase().includes(searchValue));
-  console.log("Artists results:", results); // Log the search results
-  return results;
-}
-
-function searchTracks(searchValue, filteredAlbums) {
-  searchValue = searchValue.toLowerCase();
-  const results = tracks.filter((track) => {
-    const trackMatch = track.trackName.toLowerCase().includes(searchValue);
-    return trackMatch;
-  });
-
-  console.log("Tracks results:", results); // Log the search results
-  return results;
-}
+//   console.log("Tracks results:", results); // Log the search results
+//   return results;
+// }

@@ -16,9 +16,52 @@
       </div>
     </header>
     <div id="grid-container">
-      <section id="albums"></section>
-      <section id="artists"></section>
-      <section id="tracks"></section>
+      <section id="albums">
+        <h1>Albums</h1>
+        <table id="albums-table">
+          <thead>
+            <tr>
+              <th>Cover</th>
+              <th>Title</th>
+              <th>Releasedate</th>
+              <th>Tracks</th>
+            </tr>
+          </thead>
+          <tbody id="albums-table-body"></tbody>
+        </table>
+      </section>
+
+      <section id="artists">
+        <h1>Artists</h1>
+        <table id="artists-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Birthdate</th>
+              <th>Genres</th>
+              <th>Website</th>
+              <th>Image</th>
+              <th>Number of Albums</th>
+            </tr>
+          </thead>
+          <tbody id="artists-table-body"></tbody>
+        </table>
+      </section>
+
+      <section id="tracks">
+        <h1>Tracks</h1>
+        <table id="tracks-table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Duration</th>
+              <th>Artists</th>
+              <th>Albums</th>
+            </tr>
+          </thead>
+          <tbody id="tracks-table-body"></tbody>
+        </table>
+      </section>
     </div>
     <script src="app.js" type="module"></script>
   </body>

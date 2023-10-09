@@ -1,6 +1,10 @@
 "use strict";
 
 import { getAlbumData, getArtistData, getTrackData } from "./rest-service.js";
+import { ListRenderer } from "./listrenderer.js";
+import { Albumrenderer } from "./albumrenderer.js";
+import { Trackrenderer } from "./trackrenderer.js";
+import { Artistrenderer } from "./artistrenderer.js";
 
 window.addEventListener("load", initApp);
 
@@ -18,12 +22,25 @@ async function initApp() {
   console.log("app running!");
   document.querySelector("#input-search").addEventListener("keyup", searchDatabase);
   albums = await getAlbumData();
+  console.log(albums);
   artists = await getArtistData();
   tracks = await getTrackData();
 
-  showAlbums(albums);
-  showArtists(artists);
-  showTracks(tracks);
+  // Create an instance of Renderers
+  const albumRenderer = new Albumrenderer();
+  const trackRenderer = new Trackrenderer();
+  const artistRenderer = new Artistrenderer();
+
+  //display lists
+  const albumList = new ListRenderer(albums, "#albums-table-body", albumRenderer);
+  albumList.render();
+  const trackList = new ListRenderer(tracks, "#tracks-table-body", trackRenderer);
+  trackList.render();
+  const artistList = new ListRenderer(artists, "#artists-table-body", artistRenderer);
+  artistList.render();
+  //showAlbums(albums);
+  // showArtists(artists);
+  //showTracks(tracks);
 
   albumsTableBody = document.querySelector("#albums-table-body");
   artistsTableBody = document.querySelector("#artists-table-body");

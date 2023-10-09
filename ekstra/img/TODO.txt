@@ -1,0 +1,15 @@
+1. UML-diagrammer
+    -Class-diagram
+    - Use Cases --> SSD-diagram --> SD-diagram
+2. Skab overblik over kodemæssige ændringer til OOP.
+3. Lav ListRenderer - modul
+4. Lav ArtistRenderer, TrackRenderer, AlbumRenderer
+        - Hvad med "hover-tabels"??
+5. Brug af classes?
+6. (Implementer sortering på alle lister)
+7. (Implementer filtrering på alle lister)
+
+  
+Spørgsmål til Peter:
+
+Spørgsmål til Oskar:

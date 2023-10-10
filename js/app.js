@@ -25,7 +25,7 @@ async function initApp() {
   artists = await getArtistData();
   tracks = await getTrackData();
   // Group tracks by trackName
-  const groupedTracks = groupTracksByTrackName(tracks);
+  const groupedTracks = groupTracksByTrackID(tracks);
 
   // Create an instance of Renderers
   const albumRenderer = new Albumrenderer();
@@ -40,18 +40,18 @@ async function initApp() {
   const artistList = new ListRenderer(artists, "#artists-table-body", artistRenderer);
   artistList.render();
 
-  function groupTracksByTrackName(tracks) {
+  function groupTracksByTrackID(tracks) {
     const groupedTracks = {};
 
     for (const track of tracks) {
-      if (groupedTracks.hasOwnProperty(track.trackName)) {
-        // If the trackName is already in the groupedTracks object, add the albumID to the existing entry
-        groupedTracks[track.trackName].albumIDs.push(track.albumID);
+      if (groupedTracks.hasOwnProperty(track.trackID)) {
+        // If the trackID is already in the groupedTracks object, add the albumID to the existing entry
+        groupedTracks[track.trackID].albumIDs.push(track.albumID);
       } else {
-        // If the trackName is not in the groupedTracks object, create a new entry
-        groupedTracks[track.trackName] = {
-          ...track, // Copy all properties from the first occurrence of the trackName
-          albumIDs: [track.albumID], // Create an array for albumIDs
+        // If the trackID is not in the groupedTracks object, create a new entry
+        groupedTracks[track.trackID] = {
+          ...track,
+          albumIDs: [track.albumID],
         };
       }
     }
@@ -68,7 +68,7 @@ async function initApp() {
     filteredAlbums = filterAlbumsBySearch(searchInput);
     filteredTracks = filterTracksBySearch(searchInput);
 
-    filteredTracks = groupTracksByTrackName(filteredTracks);
+    filteredTracks = groupTracksByTrackID(filteredTracks);
 
     // Render the filtered results
     const searchedAlbumList = new ListRenderer(filteredAlbums, "#albums-table-body", albumRenderer);
@@ -83,25 +83,13 @@ async function initApp() {
   artistsTableBody = document.querySelector("#artists-table-body");
 
   albumsTableBody.addEventListener("mouseover", (event) => {
-    if (filteredAlbums.length > 0) {
-      const targetRow = event.target.closest(".album-row");
-      if (targetRow) {
-        const albumID = targetRow.dataset.albumId;
-        const filteredAlbumTracks = tracks.filter((track) => track.albumID === parseInt(albumID));
-        const trackInfoTable = createTrackInfoTable(filteredAlbumTracks);
-        if (trackInfoTable) {
-          targetRow.appendChild(trackInfoTable);
-        }
-      }
-    } else {
-      const targetRow = event.target.closest(".album-row");
-      if (targetRow) {
-        const albumID = targetRow.dataset.albumId;
-        const albumTracks = tracks.filter((track) => track.albumID === parseInt(albumID));
-        const trackInfoTable = createTrackInfoTable(albumTracks);
-        if (trackInfoTable) {
-          targetRow.appendChild(trackInfoTable);
-        }
+    const targetRow = event.target.closest(".album-row");
+    if (targetRow) {
+      const albumID = targetRow.dataset.albumId;
+      const albumTracks = tracks.filter((track) => track.albumID === parseInt(albumID));
+      const trackInfoTable = createTrackInfoTable(albumTracks);
+      if (trackInfoTable) {
+        targetRow.appendChild(trackInfoTable);
       }
     }
   });

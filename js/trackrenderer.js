@@ -8,18 +8,21 @@ export class Trackrenderer {
       console.error("Track is undefined or null");
       return "";
     }
-    // Find the album associated with the track's albumID
-    const album = this.albums.find((album) => album.albumID === track.albumID);
+    // Find all albums associated with the track's albumIDs
+    const albumTitles = track.albumIDs.map((albumID) => {
+      const album = this.albums.find((album) => album.albumID === albumID);
+      return album ? album.albumTitle : "Unknown Album";
+    });
 
-    // Get the album title or "Unknown Album"
-    const albumTitle = album ? album.albumTitle : "Unknown Album";
+    // Combine album titles with commas
+    const albumTitlesString = albumTitles.join(", ");
 
     let html = `
         <tr class="track-row" data-track-id="${track.trackID}">
           <td>${track.trackName}</td>
           <td>${track.duration}</td>
           <td>${track.artistNames.join(", ")}</td>
-          <td>${albumTitle}</td> <!-- Display the album title -->
+          <td>${albumTitlesString}</td> <!-- Display the album titles -->
         </tr>
     `;
 

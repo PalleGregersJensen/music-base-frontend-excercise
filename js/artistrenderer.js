@@ -6,7 +6,7 @@ export class Artistrenderer {
         <td>${artist.birthdate}</td>
         <td>${artist.genres}</td>
         <td><a href="${artist.website}" target="_blank">${artist.website}</a></td>
-        <td><img src="${artist.image}" alt="${artist.name}"/></td>
+        <td><img src="${artist.image}"/></td>
         <td>${artist.numberOfAlbums}</td>
       </tr>
     `;

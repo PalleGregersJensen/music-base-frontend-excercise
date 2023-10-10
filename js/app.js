@@ -12,6 +12,10 @@ let albums = [];
 let artists = [];
 let tracks = [];
 
+let filteredAlbums = [];
+let filteredArtists = [];
+let filteredTracks = [];
+
 let albumsTableBody; // Define albumsTableBody as a global variable
 let artistsTableBody;
 
@@ -60,9 +64,9 @@ async function initApp() {
     const searchInput = document.querySelector("#input-search").value;
 
     // Filter the original arrays based on the search input
-    const filteredArtists = filterArtistsBySearch(searchInput);
-    const filteredAlbums = filterAlbumsBySearch(searchInput);
-    let filteredTracks = filterTracksBySearch(searchInput);
+    filteredArtists = filterArtistsBySearch(searchInput);
+    filteredAlbums = filterAlbumsBySearch(searchInput);
+    filteredTracks = filterTracksBySearch(searchInput);
 
     filteredTracks = groupTracksByTrackName(filteredTracks);
 
@@ -80,13 +84,10 @@ async function initApp() {
 
   albumsTableBody.addEventListener("mouseover", (event) => {
     if (filteredAlbums.length > 0) {
-      console.log(filteredAlbums);
       const targetRow = event.target.closest(".album-row");
       if (targetRow) {
         const albumID = targetRow.dataset.albumId;
-        console.log(albumID);
-        const filteredAlbumTracks = filteredTracks.filter((track) => track.albumID === parseInt(albumID));
-        console.log(filteredAlbumTracks);
+        const filteredAlbumTracks = tracks.filter((track) => track.albumID === parseInt(albumID));
         const trackInfoTable = createTrackInfoTable(filteredAlbumTracks);
         if (trackInfoTable) {
           targetRow.appendChild(trackInfoTable);
@@ -96,9 +97,7 @@ async function initApp() {
       const targetRow = event.target.closest(".album-row");
       if (targetRow) {
         const albumID = targetRow.dataset.albumId;
-        console.log(albumID);
         const albumTracks = tracks.filter((track) => track.albumID === parseInt(albumID));
-        console.log(albumTracks);
         const trackInfoTable = createTrackInfoTable(albumTracks);
         if (trackInfoTable) {
           targetRow.appendChild(trackInfoTable);

@@ -8,6 +8,7 @@ import { Artistrenderer } from "./artistrenderer.js";
 
 window.addEventListener("load", initApp);
 
+//Definer globale variabler
 let albums = [];
 let artists = [];
 let tracks = [];
@@ -21,10 +22,12 @@ let artistsTableBody;
 
 async function initApp() {
   console.log("app running!");
+  // populate variabler med data
   albums = await getAlbumData();
   artists = await getArtistData();
   tracks = await getTrackData();
-  // Group tracks by trackName
+
+  // Group tracks by trackID
   const groupedTracks = groupTracksByTrackID(tracks);
 
   // Create an instance of Renderers
@@ -39,26 +42,6 @@ async function initApp() {
   trackList.render();
   const artistList = new ListRenderer(artists, "#artists-table-body", artistRenderer);
   artistList.render();
-
-  function groupTracksByTrackID(tracks) {
-    const groupedTracks = {};
-
-    for (const track of tracks) {
-      if (groupedTracks.hasOwnProperty(track.trackID)) {
-        // If the trackID is already in the groupedTracks object, add the albumID to the existing entry
-        groupedTracks[track.trackID].albumIDs.push(track.albumID);
-      } else {
-        // If the trackID is not in the groupedTracks object, create a new entry
-        groupedTracks[track.trackID] = {
-          ...track,
-          albumIDs: [track.albumID],
-        };
-      }
-    }
-
-    // Convert the groupedTracks object back to an array
-    return Object.values(groupedTracks);
-  }
 
   // add sort eventlisteners album
   document.querySelector("#sort-album-title").addEventListener("click", () => albumList.sort("albumTitle"));
@@ -77,6 +60,7 @@ async function initApp() {
   document.querySelector("#sort-tracks-duration").addEventListener("click", () => trackList.sort("duration"));
   document.querySelector("#sort-tracks-artistNames").addEventListener("click", () => trackList.sort("artistNames"));
 
+  // add search eventlistener
   document.querySelector("#input-search").addEventListener("keyup", () => {
     const searchInput = document.querySelector("#input-search").value;
 
@@ -84,7 +68,6 @@ async function initApp() {
     filteredArtists = filterArtistsBySearch(searchInput);
     filteredAlbums = filterAlbumsBySearch(searchInput);
     filteredTracks = filterTracksBySearch(searchInput);
-
     filteredTracks = groupTracksByTrackID(filteredTracks);
 
     // Render the filtered results
@@ -96,9 +79,11 @@ async function initApp() {
     searchedArtistList.render();
   });
 
+  // Definer global variabels as tabels by their ID
   albumsTableBody = document.querySelector("#albums-table-body");
   artistsTableBody = document.querySelector("#artists-table-body");
 
+  // Add eventlisteners for creating and removing hover tabels
   albumsTableBody.addEventListener("mouseover", (event) => {
     const targetRow = event.target.closest(".album-row");
     if (targetRow) {
@@ -144,6 +129,27 @@ async function initApp() {
   });
 }
 
+// function to group tracks by their ID
+function groupTracksByTrackID(tracks) {
+  const groupedTracks = {};
+
+  for (const track of tracks) {
+    if (groupedTracks.hasOwnProperty(track.trackID)) {
+      // If the trackID is already in the groupedTracks object, add the albumID to the existing entry
+      groupedTracks[track.trackID].albumIDs.push(track.albumID);
+    } else {
+      // If the trackID is not in the groupedTracks object, create a new entry
+      groupedTracks[track.trackID] = {
+        ...track,
+        albumIDs: [track.albumID],
+      };
+    }
+  }
+
+  // Convert the groupedTracks object back to an array
+  return Object.values(groupedTracks);
+}
+
 // Create a function to generate album info table
 function createAlbumInfoTable(artistAlbums) {
   const albumInfoTable = document.createElement("table");
@@ -183,7 +189,7 @@ function createAlbumInfoTable(artistAlbums) {
   albumInfoTable.appendChild(albumInfoTableBody);
   return albumInfoTable;
 }
-
+// Create a function to generate track info table
 function createTrackInfoTable(albumTracks) {
   const trackInfoTable = document.createElement("table");
   trackInfoTable.classList.add("track-info-table");
@@ -212,6 +218,7 @@ function createTrackInfoTable(albumTracks) {
   return trackInfoTable;
 }
 
+// function to filter artists by searchinput
 function filterArtistsBySearch(input) {
   const searchTerm = input.trim().toLowerCase();
   const artistResults = artists.filter((artist) => artist.name.toLowerCase().includes(searchTerm));
@@ -219,6 +226,7 @@ function filterArtistsBySearch(input) {
   return artistResults;
 }
 
+// function to filter albums by searchinput
 function filterAlbumsBySearch(input) {
   const searchTerm = input.trim().toLowerCase();
   const albumResults = albums.filter((album) => album.albumTitle.toLowerCase().includes(searchTerm));
@@ -226,6 +234,7 @@ function filterAlbumsBySearch(input) {
   return albumResults;
 }
 
+// function to filter tracks by searchinput
 function filterTracksBySearch(input) {
   const searchTerm = input.trim().toLowerCase();
   const trackResults = tracks.filter((track) => track.trackName.toLowerCase().includes(searchTerm));

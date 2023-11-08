@@ -64,7 +64,6 @@ async function initApp() {
 
   // Add pagination
   createPaginationButtons();
-  // document.querySelector("#page2").addEventListener("click", showPage2);
   // document.querySelector("#page3").addEventListener("click", showPage3);
 
   // add search eventlistener
@@ -159,14 +158,35 @@ async function initApp() {
 function createPaginationButtons() {
   const pageSize = 5;
   const totalPages = 100 / pageSize;
+  const paginationContainer = document.querySelector("#pagination");
+
   for (let p = 0; p < totalPages; p++) {
-    const button = document.createElement("button");
-    button.id = `page${p + 1}`;
-    button.textContent = `Page ${p * pageSize + 1} - ${p * pageSize + 5}`;
-    document.querySelector("#pagination").appendChild(button);
+    const startItem = p * pageSize + 1;
+    const endItem = startItem + pageSize - 1;
+    const buttonHTML = `
+      <button id="page${p + 1}">
+        Page ${startItem} - ${endItem}
+      </button>
+    `;
+
+    paginationContainer.insertAdjacentHTML("beforeend", buttonHTML);
+
+    // Hent knappen ved ID
+    const button = document.querySelector(`#page${p + 1}`);
+
+    // Tilføj en klikbegivenhedshåndterer til knappen
+    button.addEventListener("click", () => {
+      // Handling ved klik på knappen, f.eks. skift side eller hent data
+      console.log(`Button ${p + 1} clicked`);
+    });
   }
 }
 
+
+
+function showPaginatedContent() {
+  console.log(button.id);
+}
 
 
 // function createPaginationButtons() {

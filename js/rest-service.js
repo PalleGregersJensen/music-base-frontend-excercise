@@ -1,4 +1,6 @@
-const endpoint = "https://musicbase-backend-jmmp.azurewebsites.net/";
+// const endpoint = "https://musicbase-backend-jmmp.azurewebsites.net/";
+const endpoint = "http://localhost:3333"
+
 
 // get Json-data
 async function getAlbumData() {
@@ -27,4 +29,11 @@ async function getArtistData() {
   return data;
 }
 
-export { getAlbumData, getArtistData, getTrackData };
+async function getSomeArtists(page, pageSize) {
+  const response = await fetch(`${endpoint}/artists?page=${page}&pageSize=${pageSize}`)
+  const originalJson = await response.json();
+  return originalJson;
+}
+
+
+export { getAlbumData, getArtistData, getTrackData, getSomeArtists };

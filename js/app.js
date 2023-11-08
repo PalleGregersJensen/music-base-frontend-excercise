@@ -5,6 +5,7 @@ import { ListRenderer } from "./listrenderer.js";
 import { Albumrenderer } from "./albumrenderer.js";
 import { Trackrenderer } from "./trackrenderer.js";
 import { Artistrenderer } from "./artistrenderer.js";
+import { getSomeArtists } from "./rest-service.js";
 
 window.addEventListener("load", initApp);
 
@@ -24,7 +25,8 @@ async function initApp() {
   console.log("app running!");
   // populate variabler med data
   albums = await getAlbumData();
-  artists = await getArtistData();
+  // artists = await getArtistData();
+  artists = await getSomeArtists(2, 8);
   tracks = await getTrackData();
 
   // Group tracks by trackID
@@ -59,6 +61,11 @@ async function initApp() {
   document.querySelector("#sort-tracks-trackName").addEventListener("click", () => trackList.sort("trackName"));
   document.querySelector("#sort-tracks-duration").addEventListener("click", () => trackList.sort("duration"));
   document.querySelector("#sort-tracks-artistNames").addEventListener("click", () => trackList.sort("artistNames"));
+
+  // Add pagination
+  createPaginationButtons();
+  // document.querySelector("#page2").addEventListener("click", showPage2);
+  // document.querySelector("#page3").addEventListener("click", showPage3);
 
   // add search eventlistener
   document.querySelector("#input-search").addEventListener("keyup", () => {
@@ -128,6 +135,52 @@ async function initApp() {
     }
   });
 }
+
+// //
+// async function showPage1() {
+//   console.log("show page 1");
+//   const artists = await getSomeArtists(1,5);
+//   console.log(artists);
+// }
+
+// async function showPage2() {
+//   console.log("show page 2");
+//   const artists = await getSomeArtists(2,5);
+//   console.log(artists);
+// }
+
+// async function showPage3() {
+//   console.log("show page 3");
+//   const artists = await getSomeArtists(3,5);
+//   console.log(artists);
+// }
+
+// Create pagination buttons
+function createPaginationButtons() {
+  const pageSize = 5;
+  const totalPages = 100 / pageSize;
+  for (let p = 0; p < totalPages; p++) {
+    const button = document.createElement("button");
+    button.id = `page${p + 1}`;
+    button.textContent = `Page ${p * pageSize + 1} - ${p * pageSize + 5}`;
+    document.querySelector("#pagination").appendChild(button);
+  }
+}
+
+
+
+// function createPaginationButtons() {
+//   const pageSize = 5;
+//   const totalPages = 100 / pageSize;
+//   for (let p = 0; p < totalPages; p++) {
+//     const html = (
+//       <button id= 'page`${p+1}`'>
+//         page${p * pageSize + 1} - ${p * pageSize + 5}
+//       </button>
+//     );
+//     document.querySelector("#pagination").insertAdjacentHTML("beforeend", html);
+//   }
+// }
 
 // function to group tracks by their ID
 function groupTracksByTrackID(tracks) {
